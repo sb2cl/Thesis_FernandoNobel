@@ -1,0 +1,38 @@
+### Host-aware antithetic controller circuit. ###
+import 'ex07_wild_type.one'
+
+model WildType_AntitheticController (WildType)
+  z1  = WildType_ProteinConstitutive() # Sigma.
+  z2  = WildType_ProteinInduced()      # Anti-sigma.
+  z12 = WildType_ProteinConstitutive() # Sigma and anti-sigma complex.
+  x   = WildType_ProteinInduced()      # Protein of interest.
+
+  parameter z12.omega=0  # z12 is not expressed.
+  parameter gamma=10     # Antithetic sequestration rate.
+
+  # We have to add the antithetic reaction, but note that in the
+  # wild-type model we cannot degrade proteins directly, instead
+  # we have to redirect the mass of z1 and z2 into z12.
+  reaction
+    z1.protein + z2.protein -> z12.protein ; gamma*z1.protein*z2.protein
+  end
+
+  rule
+    x.TF  := z1.protein  # Set z1 as the transcription factor of x.
+    z2.TF := x.protein   # Set x as the transcription factor of z2.
+  end
+
+  # We have to take into account the burden of the exogenous proteins.
+  rule cell.WSum_exo := z1.W + z2.W + z12.w + x.W
+
+  # Lastly, we have to satisfy the inputs of z1, z2, z12, and x.
+  rule
+    z1.nu_t := cell.nu_t
+    z1.mu := cell.mu
+    ...
+  end
+end
+
+standalone  # Example of how to use the WildType_AntitheticController.
+  ac = WildType_AntitheticController()
+end

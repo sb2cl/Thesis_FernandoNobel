@@ -1,0 +1,39 @@
+import '../wild_type/protein_induced.onemodel'
+import '../wild_type/wild_type.onemodel'
+ 
+model AntitheticController (WildType)
+
+  x1  = ProteinConstitutive()  # Sigma protein (Control action).
+  x2  = ProteinInduced()       # Anti-sigma protein.
+  x12 = ProteinConstitutive()  # Sigma::anti-sigma complex.
+  A   = ProteinInduced()       # Protein of interest (Output).
+  B   = ProteinInduced()       # Perturbation.
+  species ref = 0              # Antithetic controller reference.
+
+  parameter  # Add parameters of the antithetic controller.
+    gamma = 10, x2.h = 2.5, A.h = 1, __perturbation = 0
+    x1.omega = 15, x2.omega_max = 3, x12.omega = 0, A.omega_max = 20
+  end
+
+  reaction x1.m + x2.m -> x12.m ; gamma*x1.m*x2.m
+
+  rule  # Set the equations of the antithetic controller.
+    A.TF  := x1.m
+    x2.TF := A.m
+    A.omega_equation:  A.omega := A.omega_max * A.TF/(A.TF+A.h)
+    B.TF := __perturbation
+    ref := x1.J / x2.J * x2.h
+  end
+
+  rule  # Add x1, x2, x12, A and B to the model.
+    x1.nu_t := nu_t
+    x1.mu := mu
+    ...  # For simplicity, we have ommited showing all the rules.
+    B.J_host_sum := J_host_sum
+  end
+
+  rule  # Override equations (total cell burden and mass).
+    WSum_equation:  WSum := p_r.W + p_nr.W + x1.W + x2.W + x12.W + A.W + B.W
+    m_p_equation:   m_p  := p_r.m + p_nr.m + x1.m + x2.m + x12.m + A.m + B.m
+  end
+end

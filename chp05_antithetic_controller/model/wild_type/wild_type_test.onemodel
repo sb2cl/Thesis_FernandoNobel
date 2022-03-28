@@ -1,0 +1,14 @@
+import './wild_type.onemodel'
+import '../mass_equation/mass_interpolated.onemodel'
+
+cell = WildType()
+mass = MassInterpolated()
+
+# Simulation time.
+parameter __t_end = 2000
+
+rule
+  mass.mu := cell.mu
+  cell.m_h := mass.m_h
+  cell.nu_equation:  cell.nu_t := cell.nu
+end

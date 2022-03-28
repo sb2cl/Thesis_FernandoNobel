@@ -1,0 +1,138 @@
+import '../wild_type/protein_constitutive.onemodel'
+import '../wild_type/protein_induced.onemodel'
+import '../wild_type/wild_type.onemodel'
+ 
+ model AntitheticController (WildType)
+
+  # Sigma protein (Control action).
+  x1 = ProteinInduced()
+  # Anti-sigma protein.
+  x2 = ProteinInduced()
+  # Sigma and anti-sigma complex.
+  x12 = ProteinConstitutive()
+
+  # Protein of interest to regulate.
+  A = ProteinInduced()
+
+  # Protein which generates burden to A.
+  B = ProteinInduced()
+
+  parameter
+    # Antithetic sequestration affininty (1/molec/min).
+    gamma = 100000
+    x1.omega_max = 3
+    x2.omega_max = 1
+    x12.omega = 0
+    A.omega_max = 10
+    B.omega_max = 10
+
+    x2.h = 1
+    A.h = 1
+  end
+
+  species
+    ref = 0
+  end
+
+  parameter
+    # If 0, B does not produce burden.
+    # If 1, B produces burden.
+    __burden = 0
+
+    # If 0, dilution of the antithetic controller neglected.
+    # If 1, dilution of the antithetic controller is taken into account
+    __dilution = 1
+
+    # If 0, the control loop is closed, antithetic controller working.
+    # If 1, process is in open loop, no antithetic controller.
+    __openloop = 1
+  end
+
+  rule
+    A.TF  := x1.m*(1-__openloop)
+    x2.TF := A.m*(1-__openloop)
+    B.TF  := __burden
+
+    A.omega_equation:  A.omega := A.omega_max * (A.TF/(A.TF+A.h) + __openloop)
+    B.omega_equation:  B.omega := B.omega_max * __burden
+    x1.omega_equation: x1.omega := x1.omega_max * (1-__openloop)
+
+    ref := x1.J/ (x2.J*x2.h/(A.m*(1-__openloop))) * x2.h
+  end
+
+  reaction
+    x1.m + x2.m -> x12.m ; gamma*x1.m*x2.m
+    0 -> x1.m ; mu*x1.m*(1-__dilution)
+    0 -> x2.m ; mu*x2.m*(1-__dilution)
+    0 -> x12.m ; mu*x12.m*(1-__dilution)
+  end
+
+  # Add x1 to the model.
+  rule
+    x1.nu_t := nu_t
+    x1.mu := mu
+    x1.r := r
+    x1.m_h := m_h
+    x1.J_host_sum := J_host_sum
+  end
+
+  # Add x2 to the model.
+  rule
+    x2.nu_t := nu_t
+    x2.mu := mu
+    x2.r := r
+    x2.m_h := m_h
+    x2.J_host_sum := J_host_sum
+  end
+
+  # Add x12 to the model.
+  rule
+    x12.nu_t := nu_t
+    x12.mu := mu
+    x12.r := r
+    x12.m_h := m_h
+    x12.J_host_sum := J_host_sum
+  end
+
+  # Add A to the model.
+  rule
+    A.nu_t := nu_t
+    A.mu := mu
+    A.r := r
+    A.m_h := m_h
+    A.J_host_sum := J_host_sum
+  end
+
+  # Add B to the model.
+  rule
+    B.nu_t := nu_t
+    B.mu := mu
+    B.r := r
+    B.m_h := m_h
+    B.J_host_sum := J_host_sum
+  end
+
+  # Override equations.
+  rule
+    WSum_equation:  WSum := p_r.W + p_nr.W + x1.W + x2.W + x12.W + A.W + B.W
+    m_p_equation:   m_p  := p_r.m + p_nr.m + x1.m + x2.m + x12.m + A.m + B.m
+  end
+end
+
+standalone
+  import '../mass_equation/mass_interpolated.onemodel'
+
+  mass = MassInterpolated()
+  cell = AntitheticController()
+
+  parameter
+    __t_end = 1000
+    s = 3.6
+  end
+
+  rule
+    cell.s := s
+    mass.mu := cell.mu
+    cell.m_h := mass.m_h
+  end
+end

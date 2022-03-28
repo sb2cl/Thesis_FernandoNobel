@@ -1,0 +1,25 @@
+## The cell grows with unlimited substrated and express protein A.
+
+# This is a pseudo-model. We use this model to calculate the initial conditions
+# for other models.
+
+import './synthetic_circuit/one_protein.onemodel'
+import './mass_equation/mass_interpolated.onemodel'
+
+cell = OneProtein()
+mass = MassInterpolated()
+
+parameter 
+  # Simulation time (min).
+  __t_end = 1e+9
+  cell.p_A.omega = 50;
+  cell.p_A.k_b = 5.1754;
+  cell.p_A.k_u = 117.2305;
+  s = 3.6;
+end
+
+rule 
+  mass.mu := cell.mu
+  cell.m_h := mass.m_h
+  cell.s := s
+end

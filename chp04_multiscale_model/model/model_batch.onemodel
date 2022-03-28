@@ -1,0 +1,23 @@
+import './synthetic_circuit/one_protein.onemodel'
+import './mass_equation/mass_interpolated.onemodel'
+import './bioreactor/batch.onemodel'
+
+cell = OneProtein()
+mass = MassInterpolated()
+bio  = Batch()
+
+species
+  M_A = 0
+end
+
+rule 
+  cell.m_h := mass.m_h
+  cell.s := bio.s
+
+  mass.mu := cell.mu
+
+  bio.mu := cell.mu
+  bio.m_p := cell.m_p
+
+  M_A '= bio.F_out*cell.p_A.m*bio.N*1e-3
+end

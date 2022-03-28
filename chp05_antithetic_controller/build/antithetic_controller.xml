@@ -1,0 +1,1607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
+  <model id="antithetic_controller" name="antithetic_controller" substanceUnits="mole" timeUnits="second" extentUnits="mole">
+    <listOfUnitDefinitions>
+      <unitDefinition id="per_second">
+        <listOfUnits>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+    </listOfUnitDefinitions>
+    <listOfCompartments>
+      <compartment id="default_compartment" spatialDimensions="3" size="1" units="litre" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="mass__mu" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mass__m_h" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__s" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__m_h" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_r__nu_t" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_r__mu" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_r__r" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_r__m_h" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_r__J_host_sum" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_r__K_C0" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_r__E_m" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_r__J" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_r__W" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_r__m" compartment="default_compartment" initialConcentration="100" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_r__r_t" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_nr__nu_t" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_nr__mu" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_nr__r" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_nr__m_h" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_nr__J_host_sum" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_nr__K_C0" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_nr__E_m" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_nr__J" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_nr__W" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__p_nr__m" compartment="default_compartment" initialConcentration="100" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__nu_t" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__mu" compartment="default_compartment" initialConcentration="0.01" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__m_p" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__J_host_sum" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__WSum" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__phi_ht" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__r" compartment="default_compartment" initialConcentration="350" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x1__nu_t" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x1__mu" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x1__r" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x1__m_h" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x1__J_host_sum" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x1__omega" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x1__K_C0" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x1__E_m" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x1__J" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x1__W" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x1__m" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x1__TF" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x2__nu_t" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x2__mu" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x2__r" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x2__m_h" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x2__J_host_sum" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x2__omega" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x2__K_C0" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x2__E_m" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x2__J" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x2__W" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x2__m" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x2__TF" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x12__nu_t" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x12__mu" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x12__r" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x12__m_h" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x12__J_host_sum" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x12__K_C0" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x12__E_m" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x12__J" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x12__W" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__x12__m" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__A__nu_t" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__A__mu" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__A__r" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__A__m_h" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__A__J_host_sum" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__A__omega" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__A__K_C0" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__A__E_m" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__A__J" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__A__W" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__A__m" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__A__TF" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__B__nu_t" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__B__mu" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__B__r" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__B__m_h" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__B__J_host_sum" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__B__omega" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__B__K_C0" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__B__E_m" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__B__J" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__B__W" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__B__m" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__B__TF" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cell__ref" compartment="default_compartment" initialConcentration="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="mass__c_1" value="239089" units="per_second" constant="true"/>
+      <parameter id="mass__c_2" value="7432" units="per_second" constant="true"/>
+      <parameter id="mass__c_3" value="37.06" units="per_second" constant="true"/>
+      <parameter id="cell__p_r__N" value="55" units="per_second" constant="true"/>
+      <parameter id="cell__p_r__omega" value="7.33" units="per_second" constant="true"/>
+      <parameter id="cell__p_r__d_m" value="0.16" units="per_second" constant="true"/>
+      <parameter id="cell__p_r__k_b" value="4.7627" units="per_second" constant="true"/>
+      <parameter id="cell__p_r__k_u" value="119.7956" units="per_second" constant="true"/>
+      <parameter id="cell__p_r__l_p" value="195" units="per_second" constant="true"/>
+      <parameter id="cell__p_r__l_e" value="25" units="per_second" constant="true"/>
+      <parameter id="cell__p_r__weigth" value="0.0045" units="per_second" constant="true"/>
+      <parameter id="cell__p_nr__N" value="1735" units="per_second" constant="true"/>
+      <parameter id="cell__p_nr__omega" value="0.0361" units="per_second" constant="true"/>
+      <parameter id="cell__p_nr__d_m" value="0.2" units="per_second" constant="true"/>
+      <parameter id="cell__p_nr__k_b" value="12.4404" units="per_second" constant="true"/>
+      <parameter id="cell__p_nr__k_u" value="10.0454" units="per_second" constant="true"/>
+      <parameter id="cell__p_nr__l_p" value="333" units="per_second" constant="true"/>
+      <parameter id="cell__p_nr__l_e" value="25" units="per_second" constant="true"/>
+      <parameter id="cell__K_sc" value="0.1802" units="per_second" constant="true"/>
+      <parameter id="cell__nu" value="1260" units="per_second" constant="true"/>
+      <parameter id="cell__m_aa" value="1.826e-07" units="per_second" constant="true"/>
+      <parameter id="cell__phi_m" value="0.9473" units="per_second" constant="true"/>
+      <parameter id="cell__x1__N" value="1" units="per_second" constant="true"/>
+      <parameter id="cell__x1__d_m" value="0.16" units="per_second" constant="true"/>
+      <parameter id="cell__x1__k_b" value="4.7627" units="per_second" constant="true"/>
+      <parameter id="cell__x1__k_u" value="119.7956" units="per_second" constant="true"/>
+      <parameter id="cell__x1__l_p" value="195" units="per_second" constant="true"/>
+      <parameter id="cell__x1__l_e" value="25" units="per_second" constant="true"/>
+      <parameter id="cell__x1__omega_max" value="3" units="per_second" constant="true"/>
+      <parameter id="cell__x1__h" value="100" units="per_second" constant="true"/>
+      <parameter id="cell__x2__N" value="1" units="per_second" constant="true"/>
+      <parameter id="cell__x2__d_m" value="0.16" units="per_second" constant="true"/>
+      <parameter id="cell__x2__k_b" value="4.7627" units="per_second" constant="true"/>
+      <parameter id="cell__x2__k_u" value="119.7956" units="per_second" constant="true"/>
+      <parameter id="cell__x2__l_p" value="195" units="per_second" constant="true"/>
+      <parameter id="cell__x2__l_e" value="25" units="per_second" constant="true"/>
+      <parameter id="cell__x2__omega_max" value="1" units="per_second" constant="true"/>
+      <parameter id="cell__x2__h" value="1" units="per_second" constant="true"/>
+      <parameter id="cell__x12__N" value="1" units="per_second" constant="true"/>
+      <parameter id="cell__x12__omega" value="0" units="per_second" constant="true"/>
+      <parameter id="cell__x12__d_m" value="0.16" units="per_second" constant="true"/>
+      <parameter id="cell__x12__k_b" value="4.7627" units="per_second" constant="true"/>
+      <parameter id="cell__x12__k_u" value="119.7956" units="per_second" constant="true"/>
+      <parameter id="cell__x12__l_p" value="195" units="per_second" constant="true"/>
+      <parameter id="cell__x12__l_e" value="25" units="per_second" constant="true"/>
+      <parameter id="cell__A__N" value="1" units="per_second" constant="true"/>
+      <parameter id="cell__A__d_m" value="0.16" units="per_second" constant="true"/>
+      <parameter id="cell__A__k_b" value="4.7627" units="per_second" constant="true"/>
+      <parameter id="cell__A__k_u" value="119.7956" units="per_second" constant="true"/>
+      <parameter id="cell__A__l_p" value="195" units="per_second" constant="true"/>
+      <parameter id="cell__A__l_e" value="25" units="per_second" constant="true"/>
+      <parameter id="cell__A__omega_max" value="10" units="per_second" constant="true"/>
+      <parameter id="cell__A__h" value="1" units="per_second" constant="true"/>
+      <parameter id="cell__B__N" value="1" units="per_second" constant="true"/>
+      <parameter id="cell__B__d_m" value="0.16" units="per_second" constant="true"/>
+      <parameter id="cell__B__k_b" value="4.7627" units="per_second" constant="true"/>
+      <parameter id="cell__B__k_u" value="119.7956" units="per_second" constant="true"/>
+      <parameter id="cell__B__l_p" value="195" units="per_second" constant="true"/>
+      <parameter id="cell__B__l_e" value="25" units="per_second" constant="true"/>
+      <parameter id="cell__B__omega_max" value="10" units="per_second" constant="true"/>
+      <parameter id="cell__B__h" value="100" units="per_second" constant="true"/>
+      <parameter id="cell__gamma" value="100000" units="per_second" constant="true"/>
+      <parameter id="cell____burden" value="0" units="per_second" constant="true"/>
+      <parameter id="cell____dilution" value="1" units="per_second" constant="true"/>
+      <parameter id="cell____openloop" value="1" units="per_second" constant="true"/>
+      <parameter id="__t_end" value="1000" units="per_second" constant="true"/>
+      <parameter id="s" value="3.6" units="per_second" constant="true"/>
+    </listOfParameters>
+    <listOfRules>
+      <assignmentRule id="mass___R0" variable="mass__m_h">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <apply>
+              <times/>
+              <ci> mass__c_1 </ci>
+              <ci> mass__mu </ci>
+              <ci> mass__mu </ci>
+            </apply>
+            <apply>
+              <times/>
+              <ci> mass__c_2 </ci>
+              <ci> mass__mu </ci>
+            </apply>
+            <ci> mass__c_3 </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__p_r___R1" variable="cell__p_r__K_C0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> cell__p_r__k_b </ci>
+            <apply>
+              <plus/>
+              <ci> cell__p_r__k_u </ci>
+              <apply>
+                <divide/>
+                <ci> cell__p_r__nu_t </ci>
+                <ci> cell__p_r__l_e </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__p_r__E_m_eq" variable="cell__p_r__E_m">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <cn> 3.459 </cn>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__p_r__J_eq" variable="cell__p_r__J">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> cell__p_r__E_m </ci>
+              <ci> cell__p_r__omega </ci>
+            </apply>
+            <apply>
+              <plus/>
+              <apply>
+                <divide/>
+                <ci> cell__p_r__d_m </ci>
+                <ci> cell__p_r__K_C0 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> cell__p_r__mu </ci>
+                <ci> cell__p_r__r </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__p_r___R2" variable="cell__p_r__W">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> cell__p_r__N </ci>
+            <apply>
+              <plus/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <divide/>
+                <cn type="integer"> 1 </cn>
+                <ci> cell__p_r__E_m </ci>
+              </apply>
+            </apply>
+            <ci> cell__p_r__J </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__p_r___R3" variable="cell__p_r__r_t">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> cell__p_r__m </ci>
+            <ci> cell__p_r__weigth </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__p_nr___R4" variable="cell__p_nr__K_C0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> cell__p_nr__k_b </ci>
+            <apply>
+              <plus/>
+              <ci> cell__p_nr__k_u </ci>
+              <apply>
+                <divide/>
+                <ci> cell__p_nr__nu_t </ci>
+                <ci> cell__p_nr__l_e </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__p_nr__E_m_eq" variable="cell__p_nr__E_m">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <cn> 6.3492 </cn>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__p_nr__J_eq" variable="cell__p_nr__J">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> cell__p_nr__E_m </ci>
+              <ci> cell__p_nr__omega </ci>
+            </apply>
+            <apply>
+              <plus/>
+              <apply>
+                <divide/>
+                <ci> cell__p_nr__d_m </ci>
+                <ci> cell__p_nr__K_C0 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> cell__p_nr__mu </ci>
+                <ci> cell__p_nr__r </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__p_nr___R5" variable="cell__p_nr__W">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> cell__p_nr__N </ci>
+            <apply>
+              <plus/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <divide/>
+                <cn type="integer"> 1 </cn>
+                <ci> cell__p_nr__E_m </ci>
+              </apply>
+            </apply>
+            <ci> cell__p_nr__J </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R6" variable="cell__p_r__nu_t">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__nu_t </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R7" variable="cell__p_r__mu">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__mu </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R8" variable="cell__p_r__r">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__r </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R9" variable="cell__p_r__m_h">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__m_h </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R10" variable="cell__p_r__J_host_sum">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__J_host_sum </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R11" variable="cell__p_nr__nu_t">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__nu_t </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R12" variable="cell__p_nr__mu">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__mu </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R13" variable="cell__p_nr__r">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__r </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R14" variable="cell__p_nr__m_h">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__m_h </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R15" variable="cell__p_nr__J_host_sum">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__J_host_sum </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R16" variable="cell__J_host_sum">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <apply>
+              <times/>
+              <ci> cell__p_r__N </ci>
+              <ci> cell__p_r__J </ci>
+            </apply>
+            <apply>
+              <times/>
+              <ci> cell__p_nr__N </ci>
+              <ci> cell__p_nr__J </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__nu_equation" variable="cell__nu_t">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> cell__nu </ci>
+              <ci> cell__s </ci>
+            </apply>
+            <apply>
+              <plus/>
+              <ci> cell__s </ci>
+              <ci> cell__K_sc </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R17" variable="cell__phi_ht">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <ci> cell__p_r__N </ci>
+                <ci> cell__p_r__J </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> cell__p_nr__N </ci>
+                <ci> cell__p_nr__J </ci>
+              </apply>
+            </apply>
+            <apply>
+              <plus/>
+              <cn type="integer"> 1 </cn>
+              <ci> cell__WSum </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <algebraicRule id="cell___R18">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <ci> cell__r </ci>
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> cell__phi_m </ci>
+                <ci> cell__p_r__r_t </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <cn type="integer"> 1 </cn>
+                <ci> cell__WSum </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </algebraicRule>
+      <algebraicRule id="cell__mu_equation">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <ci> cell__mu </ci>
+            <apply>
+              <times/>
+              <apply>
+                <divide/>
+                <ci> cell__m_aa </ci>
+                <ci> cell__m_h </ci>
+              </apply>
+              <ci> cell__nu_t </ci>
+              <ci> cell__phi_ht </ci>
+              <ci> cell__phi_m </ci>
+              <ci> cell__p_r__r_t </ci>
+            </apply>
+          </apply>
+        </math>
+      </algebraicRule>
+      <assignmentRule id="cell__WSum_equation" variable="cell__WSum">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> cell__p_r__W </ci>
+            <ci> cell__p_nr__W </ci>
+            <ci> cell__x1__W </ci>
+            <ci> cell__x2__W </ci>
+            <ci> cell__x12__W </ci>
+            <ci> cell__A__W </ci>
+            <ci> cell__B__W </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__m_p_equation" variable="cell__m_p">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> cell__p_r__m </ci>
+            <ci> cell__p_nr__m </ci>
+            <ci> cell__x1__m </ci>
+            <ci> cell__x2__m </ci>
+            <ci> cell__x12__m </ci>
+            <ci> cell__A__m </ci>
+            <ci> cell__B__m </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x1___R19" variable="cell__x1__K_C0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> cell__x1__k_b </ci>
+            <apply>
+              <plus/>
+              <ci> cell__x1__k_u </ci>
+              <apply>
+                <divide/>
+                <ci> cell__x1__nu_t </ci>
+                <ci> cell__x1__l_e </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x1__E_m_eq" variable="cell__x1__E_m">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <divide/>
+              <ci> cell__x1__l_p </ci>
+              <ci> cell__x1__l_e </ci>
+            </apply>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <divide/>
+                <ci> cell__x1__l_p </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> cell__x1__l_p </ci>
+                    <ci> cell__x1__l_e </ci>
+                  </apply>
+                  <apply>
+                    <divide/>
+                    <ci> cell__x1__l_p </ci>
+                    <ci> cell__x1__l_e </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x1__J_eq" variable="cell__x1__J">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> cell__x1__E_m </ci>
+              <ci> cell__x1__omega </ci>
+            </apply>
+            <apply>
+              <plus/>
+              <apply>
+                <divide/>
+                <ci> cell__x1__d_m </ci>
+                <ci> cell__x1__K_C0 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> cell__x1__mu </ci>
+                <ci> cell__x1__r </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x1___R20" variable="cell__x1__W">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> cell__x1__N </ci>
+            <apply>
+              <plus/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <divide/>
+                <cn type="integer"> 1 </cn>
+                <ci> cell__x1__E_m </ci>
+              </apply>
+            </apply>
+            <ci> cell__x1__J </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x1__omega_equation" variable="cell__x1__omega">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> cell__x1__omega_max </ci>
+              <ci> cell__x1__TF </ci>
+            </apply>
+            <ci> cell__x1__h </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x2___R21" variable="cell__x2__K_C0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> cell__x2__k_b </ci>
+            <apply>
+              <plus/>
+              <ci> cell__x2__k_u </ci>
+              <apply>
+                <divide/>
+                <ci> cell__x2__nu_t </ci>
+                <ci> cell__x2__l_e </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x2__E_m_eq" variable="cell__x2__E_m">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <divide/>
+              <ci> cell__x2__l_p </ci>
+              <ci> cell__x2__l_e </ci>
+            </apply>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <divide/>
+                <ci> cell__x2__l_p </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> cell__x2__l_p </ci>
+                    <ci> cell__x2__l_e </ci>
+                  </apply>
+                  <apply>
+                    <divide/>
+                    <ci> cell__x2__l_p </ci>
+                    <ci> cell__x2__l_e </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x2__J_eq" variable="cell__x2__J">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> cell__x2__E_m </ci>
+              <ci> cell__x2__omega </ci>
+            </apply>
+            <apply>
+              <plus/>
+              <apply>
+                <divide/>
+                <ci> cell__x2__d_m </ci>
+                <ci> cell__x2__K_C0 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> cell__x2__mu </ci>
+                <ci> cell__x2__r </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x2___R22" variable="cell__x2__W">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> cell__x2__N </ci>
+            <apply>
+              <plus/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <divide/>
+                <cn type="integer"> 1 </cn>
+                <ci> cell__x2__E_m </ci>
+              </apply>
+            </apply>
+            <ci> cell__x2__J </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x2__omega_equation" variable="cell__x2__omega">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> cell__x2__omega_max </ci>
+              <ci> cell__x2__TF </ci>
+            </apply>
+            <ci> cell__x2__h </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x12___R23" variable="cell__x12__K_C0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> cell__x12__k_b </ci>
+            <apply>
+              <plus/>
+              <ci> cell__x12__k_u </ci>
+              <apply>
+                <divide/>
+                <ci> cell__x12__nu_t </ci>
+                <ci> cell__x12__l_e </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x12__E_m_eq" variable="cell__x12__E_m">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <divide/>
+              <ci> cell__x12__l_p </ci>
+              <ci> cell__x12__l_e </ci>
+            </apply>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <divide/>
+                <ci> cell__x12__l_p </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> cell__x12__l_p </ci>
+                    <ci> cell__x12__l_e </ci>
+                  </apply>
+                  <apply>
+                    <divide/>
+                    <ci> cell__x12__l_p </ci>
+                    <ci> cell__x12__l_e </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x12__J_eq" variable="cell__x12__J">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> cell__x12__E_m </ci>
+              <ci> cell__x12__omega </ci>
+            </apply>
+            <apply>
+              <plus/>
+              <apply>
+                <divide/>
+                <ci> cell__x12__d_m </ci>
+                <ci> cell__x12__K_C0 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> cell__x12__mu </ci>
+                <ci> cell__x12__r </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x12___R24" variable="cell__x12__W">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> cell__x12__N </ci>
+            <apply>
+              <plus/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <divide/>
+                <cn type="integer"> 1 </cn>
+                <ci> cell__x12__E_m </ci>
+              </apply>
+            </apply>
+            <ci> cell__x12__J </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__A___R25" variable="cell__A__K_C0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> cell__A__k_b </ci>
+            <apply>
+              <plus/>
+              <ci> cell__A__k_u </ci>
+              <apply>
+                <divide/>
+                <ci> cell__A__nu_t </ci>
+                <ci> cell__A__l_e </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__A__E_m_eq" variable="cell__A__E_m">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <divide/>
+              <ci> cell__A__l_p </ci>
+              <ci> cell__A__l_e </ci>
+            </apply>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <divide/>
+                <ci> cell__A__l_p </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> cell__A__l_p </ci>
+                    <ci> cell__A__l_e </ci>
+                  </apply>
+                  <apply>
+                    <divide/>
+                    <ci> cell__A__l_p </ci>
+                    <ci> cell__A__l_e </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__A__J_eq" variable="cell__A__J">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> cell__A__E_m </ci>
+              <ci> cell__A__omega </ci>
+            </apply>
+            <apply>
+              <plus/>
+              <apply>
+                <divide/>
+                <ci> cell__A__d_m </ci>
+                <ci> cell__A__K_C0 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> cell__A__mu </ci>
+                <ci> cell__A__r </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__A___R26" variable="cell__A__W">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> cell__A__N </ci>
+            <apply>
+              <plus/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <divide/>
+                <cn type="integer"> 1 </cn>
+                <ci> cell__A__E_m </ci>
+              </apply>
+            </apply>
+            <ci> cell__A__J </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__A__omega_equation" variable="cell__A__omega">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> cell__A__omega_max </ci>
+              <ci> cell__A__TF </ci>
+            </apply>
+            <ci> cell__A__h </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__B___R27" variable="cell__B__K_C0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> cell__B__k_b </ci>
+            <apply>
+              <plus/>
+              <ci> cell__B__k_u </ci>
+              <apply>
+                <divide/>
+                <ci> cell__B__nu_t </ci>
+                <ci> cell__B__l_e </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__B__E_m_eq" variable="cell__B__E_m">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <divide/>
+              <ci> cell__B__l_p </ci>
+              <ci> cell__B__l_e </ci>
+            </apply>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <divide/>
+                <ci> cell__B__l_p </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> cell__B__l_p </ci>
+                    <ci> cell__B__l_e </ci>
+                  </apply>
+                  <apply>
+                    <divide/>
+                    <ci> cell__B__l_p </ci>
+                    <ci> cell__B__l_e </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__B__J_eq" variable="cell__B__J">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> cell__B__E_m </ci>
+              <ci> cell__B__omega </ci>
+            </apply>
+            <apply>
+              <plus/>
+              <apply>
+                <divide/>
+                <ci> cell__B__d_m </ci>
+                <ci> cell__B__K_C0 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> cell__B__mu </ci>
+                <ci> cell__B__r </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__B___R28" variable="cell__B__W">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> cell__B__N </ci>
+            <apply>
+              <plus/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <divide/>
+                <cn type="integer"> 1 </cn>
+                <ci> cell__B__E_m </ci>
+              </apply>
+            </apply>
+            <ci> cell__B__J </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__B__omega_equation" variable="cell__B__omega">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> cell__B__omega_max </ci>
+              <ci> cell__B__TF </ci>
+            </apply>
+            <ci> cell__B__h </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R29" variable="cell__A__TF">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> cell__x1__m </ci>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> cell____openloop </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R30" variable="cell__x2__TF">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> cell__A__m </ci>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> cell____openloop </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R31" variable="cell__B__TF">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell____burden </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__A__omega_equation" variable="cell__A__omega">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> cell__A__omega_max </ci>
+            <apply>
+              <plus/>
+              <apply>
+                <divide/>
+                <ci> cell__A__TF </ci>
+                <apply>
+                  <plus/>
+                  <ci> cell__A__TF </ci>
+                  <ci> cell__A__h </ci>
+                </apply>
+              </apply>
+              <ci> cell____openloop </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__B__omega_equation" variable="cell__B__omega">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> cell__B__omega_max </ci>
+            <ci> cell____burden </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell__x1__omega_equation" variable="cell__x1__omega">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> cell__x1__omega_max </ci>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> cell____openloop </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R32" variable="cell__ref">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <divide/>
+              <ci> cell__x1__J </ci>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> cell__x2__J </ci>
+                  <ci> cell__x2__h </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> cell__A__m </ci>
+                  <apply>
+                    <minus/>
+                    <cn type="integer"> 1 </cn>
+                    <ci> cell____openloop </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+            <ci> cell__x2__h </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R33" variable="cell__x1__nu_t">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__nu_t </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R34" variable="cell__x1__mu">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__mu </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R35" variable="cell__x1__r">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__r </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R36" variable="cell__x1__m_h">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__m_h </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R37" variable="cell__x1__J_host_sum">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__J_host_sum </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R38" variable="cell__x2__nu_t">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__nu_t </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R39" variable="cell__x2__mu">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__mu </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R40" variable="cell__x2__r">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__r </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R41" variable="cell__x2__m_h">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__m_h </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R42" variable="cell__x2__J_host_sum">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__J_host_sum </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R43" variable="cell__x12__nu_t">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__nu_t </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R44" variable="cell__x12__mu">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__mu </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R45" variable="cell__x12__r">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__r </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R46" variable="cell__x12__m_h">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__m_h </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R47" variable="cell__x12__J_host_sum">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__J_host_sum </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R48" variable="cell__A__nu_t">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__nu_t </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R49" variable="cell__A__mu">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__mu </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R50" variable="cell__A__r">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__r </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R51" variable="cell__A__m_h">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__m_h </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R52" variable="cell__A__J_host_sum">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__J_host_sum </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R53" variable="cell__B__nu_t">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__nu_t </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R54" variable="cell__B__mu">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__mu </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R55" variable="cell__B__r">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__r </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R56" variable="cell__B__m_h">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__m_h </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="cell___R57" variable="cell__B__J_host_sum">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__J_host_sum </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="_R58" variable="cell__s">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> s </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="_R59" variable="mass__mu">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> cell__mu </ci>
+        </math>
+      </assignmentRule>
+      <assignmentRule id="_R60" variable="cell__m_h">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> mass__m_h </ci>
+        </math>
+      </assignmentRule>
+    </listOfRules>
+    <listOfReactions>
+      <reaction id="cell__p_r___J0" reversible="false">
+        <listOfProducts>
+          <speciesReference species="cell__p_r__m" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="cell__p_r__m_h"/>
+          <modifierSpeciesReference species="cell__p_r__J"/>
+          <modifierSpeciesReference species="cell__p_r__J_host_sum"/>
+          <modifierSpeciesReference species="cell__p_r__m"/>
+          <modifierSpeciesReference species="cell__p_r__mu"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <divide/>
+                  <apply>
+                    <times/>
+                    <ci> cell__p_r__m_h </ci>
+                    <ci> cell__p_r__N </ci>
+                    <ci> cell__p_r__J </ci>
+                  </apply>
+                  <ci> cell__p_r__J_host_sum </ci>
+                </apply>
+                <ci> cell__p_r__m </ci>
+              </apply>
+              <ci> cell__p_r__mu </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="cell__p_nr___J1" reversible="false">
+        <listOfProducts>
+          <speciesReference species="cell__p_nr__m" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="cell__p_nr__m_h"/>
+          <modifierSpeciesReference species="cell__p_nr__J"/>
+          <modifierSpeciesReference species="cell__p_nr__J_host_sum"/>
+          <modifierSpeciesReference species="cell__p_nr__m"/>
+          <modifierSpeciesReference species="cell__p_nr__mu"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <divide/>
+                  <apply>
+                    <times/>
+                    <ci> cell__p_nr__m_h </ci>
+                    <ci> cell__p_nr__N </ci>
+                    <ci> cell__p_nr__J </ci>
+                  </apply>
+                  <ci> cell__p_nr__J_host_sum </ci>
+                </apply>
+                <ci> cell__p_nr__m </ci>
+              </apply>
+              <ci> cell__p_nr__mu </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="cell__x1___J2" reversible="false">
+        <listOfProducts>
+          <speciesReference species="cell__x1__m" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="cell__x1__m_h"/>
+          <modifierSpeciesReference species="cell__x1__J"/>
+          <modifierSpeciesReference species="cell__x1__J_host_sum"/>
+          <modifierSpeciesReference species="cell__x1__m"/>
+          <modifierSpeciesReference species="cell__x1__mu"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <divide/>
+                  <apply>
+                    <times/>
+                    <ci> cell__x1__m_h </ci>
+                    <ci> cell__x1__N </ci>
+                    <ci> cell__x1__J </ci>
+                  </apply>
+                  <ci> cell__x1__J_host_sum </ci>
+                </apply>
+                <ci> cell__x1__m </ci>
+              </apply>
+              <ci> cell__x1__mu </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="cell__x2___J3" reversible="false">
+        <listOfProducts>
+          <speciesReference species="cell__x2__m" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="cell__x2__m_h"/>
+          <modifierSpeciesReference species="cell__x2__J"/>
+          <modifierSpeciesReference species="cell__x2__J_host_sum"/>
+          <modifierSpeciesReference species="cell__x2__m"/>
+          <modifierSpeciesReference species="cell__x2__mu"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <divide/>
+                  <apply>
+                    <times/>
+                    <ci> cell__x2__m_h </ci>
+                    <ci> cell__x2__N </ci>
+                    <ci> cell__x2__J </ci>
+                  </apply>
+                  <ci> cell__x2__J_host_sum </ci>
+                </apply>
+                <ci> cell__x2__m </ci>
+              </apply>
+              <ci> cell__x2__mu </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="cell__x12___J4" reversible="false">
+        <listOfProducts>
+          <speciesReference species="cell__x12__m" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="cell__x12__m_h"/>
+          <modifierSpeciesReference species="cell__x12__J"/>
+          <modifierSpeciesReference species="cell__x12__J_host_sum"/>
+          <modifierSpeciesReference species="cell__x12__m"/>
+          <modifierSpeciesReference species="cell__x12__mu"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <divide/>
+                  <apply>
+                    <times/>
+                    <ci> cell__x12__m_h </ci>
+                    <ci> cell__x12__N </ci>
+                    <ci> cell__x12__J </ci>
+                  </apply>
+                  <ci> cell__x12__J_host_sum </ci>
+                </apply>
+                <ci> cell__x12__m </ci>
+              </apply>
+              <ci> cell__x12__mu </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="cell__A___J5" reversible="false">
+        <listOfProducts>
+          <speciesReference species="cell__A__m" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="cell__A__m_h"/>
+          <modifierSpeciesReference species="cell__A__J"/>
+          <modifierSpeciesReference species="cell__A__J_host_sum"/>
+          <modifierSpeciesReference species="cell__A__m"/>
+          <modifierSpeciesReference species="cell__A__mu"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <divide/>
+                  <apply>
+                    <times/>
+                    <ci> cell__A__m_h </ci>
+                    <ci> cell__A__N </ci>
+                    <ci> cell__A__J </ci>
+                  </apply>
+                  <ci> cell__A__J_host_sum </ci>
+                </apply>
+                <ci> cell__A__m </ci>
+              </apply>
+              <ci> cell__A__mu </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="cell__B___J6" reversible="false">
+        <listOfProducts>
+          <speciesReference species="cell__B__m" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="cell__B__m_h"/>
+          <modifierSpeciesReference species="cell__B__J"/>
+          <modifierSpeciesReference species="cell__B__J_host_sum"/>
+          <modifierSpeciesReference species="cell__B__m"/>
+          <modifierSpeciesReference species="cell__B__mu"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <divide/>
+                  <apply>
+                    <times/>
+                    <ci> cell__B__m_h </ci>
+                    <ci> cell__B__N </ci>
+                    <ci> cell__B__J </ci>
+                  </apply>
+                  <ci> cell__B__J_host_sum </ci>
+                </apply>
+                <ci> cell__B__m </ci>
+              </apply>
+              <ci> cell__B__mu </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="cell___J7" reversible="false">
+        <listOfReactants>
+          <speciesReference species="cell__x1__m" constant="true"/>
+          <speciesReference species="cell__x2__m" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="cell__x12__m" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="cell__x1__m"/>
+          <modifierSpeciesReference species="cell__x2__m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> cell__gamma </ci>
+              <ci> cell__x1__m </ci>
+              <ci> cell__x2__m </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="cell___J8" reversible="false">
+        <listOfProducts>
+          <speciesReference species="cell__x1__m" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="cell__mu"/>
+          <modifierSpeciesReference species="cell__x1__m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> cell__mu </ci>
+              <ci> cell__x1__m </ci>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> cell____dilution </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="cell___J9" reversible="false">
+        <listOfProducts>
+          <speciesReference species="cell__x2__m" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="cell__mu"/>
+          <modifierSpeciesReference species="cell__x2__m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> cell__mu </ci>
+              <ci> cell__x2__m </ci>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> cell____dilution </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="cell___J10" reversible="false">
+        <listOfProducts>
+          <speciesReference species="cell__x12__m" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="cell__mu"/>
+          <modifierSpeciesReference species="cell__x12__m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> cell__mu </ci>
+              <ci> cell__x12__m </ci>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> cell____dilution </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
