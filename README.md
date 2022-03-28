@@ -34,7 +34,7 @@ Finally, as a *fourth scale*, part of the Thesis was devoted to developing softw
 This document is divided into seven chapters.
 Chapter 1 is an overall introduction to the Thesis work and its justification; it also presents a visual map of the Thesis and lists the main contributions.
 Chapter 2 shows the development of the host-aware model (Chapters 4 and 5 make use of this model for their simulations).
-Chapter 3 presents *OneModel*: a software tool developed in the Thesis that facilitates modeling and simulation for synthetic biology—in particular, it facilitates the use of the host-aware model—
+Chapter 3 presents *OneModel*: a software tool developed in the Thesis that facilitates modeling and simulation for synthetic biology—in particular, it facilitates the use of the host-aware model—.
 Chapter 4 uses the host-aware model to assemble the multi-scale model considering the bioreactor and analyzes the titer, productivity (rate), and yield in expressing an exogenous protein.
 Chapter 5 analyzes a more complex circuit, the recently proposed and highly cited antithetic biomolecular controller, using the host-aware model.
 Chapter 6 shows the design of nonlinear control strategies that allow controlling the concentration of biomass in a continuous bioreactor in a robust way.
