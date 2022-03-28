@@ -11,7 +11,7 @@ Most of the *OneModel* and *Matlab* code that we have used to generate the simul
 
 **License**: **TODO**
 
-**Contact:** Fernando N. Santos Navarro (<fersann1@upv.es>) and J. Picó (<jpico@ai2.upv.es>)
+**Contact:** Fernando N. Santos Navarro (<fersann1@upv.es>), and J. Picó (<jpico@ai2.upv.es>)
 
 Please cite using the following BibTex entry: **TODO**
 
@@ -29,12 +29,12 @@ The work presented in this Thesis covers the three scales of the bioproduction p
 The first scale is the bioreactor: this scale considers the macroscopic substrate and biomass dynamics and how these dynamics connect to the internal state of the cells.
 The second scale is the host cell: this scale considers the internal dynamics of the cell and the competition for limited shared resources for protein expression.
 The third scale is the synthetic genetic circuit: this scale considers the dynamics of expressing exogenous synthetic circuits and the burden they induce on to the host cell.
-Finally, as a <<fourth>> scale, part of the Thesis was devoted to developing software tools for modeling and simulation.
+Finally, as a *fourth scale*, part of the Thesis was devoted to developing software tools for modeling and simulation.
 
 This document is divided into seven chapters.
 Chapter 1 is an overall introduction to the Thesis work and its justification; it also presents a visual map of the Thesis and lists the main contributions.
 Chapter 2 shows the development of the host-aware model (Chapters 4 and 5 make use of this model for their simulations).
-Chapter 3 presents \textit{OneModel}: a software tool developed in the Thesis that facilitates modeling and simulation for synthetic biology---in particular, it facilitates the use of the host-aware model---.
+Chapter 3 presents *OneModel*: a software tool developed in the Thesis that facilitates modeling and simulation for synthetic biology—in particular, it facilitates the use of the host-aware model—
 Chapter 4 uses the host-aware model to assemble the multi-scale model considering the bioreactor and analyzes the titer, productivity (rate), and yield in expressing an exogenous protein.
 Chapter 5 analyzes a more complex circuit, the recently proposed and highly cited antithetic biomolecular controller, using the host-aware model.
 Chapter 6 shows the design of nonlinear control strategies that allow controlling the concentration of biomass in a continuous bioreactor in a robust way.
