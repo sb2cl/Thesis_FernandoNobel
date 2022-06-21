@@ -7,7 +7,7 @@ But cells are matter that dances.”—Uri Alon, *An Introduction to Systems Bio
 
 Most of the *OneModel* and *Matlab* code that we have used to generate the simulations and figures in this Thesis is available in this repository.
 
-**Thesis PDF:** **TODO**
+**Thesis PDF:** http://hdl.handle.net/10251/183473
 
 **License**: **TODO**
 
@@ -39,7 +39,7 @@ Chapter 4 uses the host-aware model to assemble the multi-scale model considerin
 Chapter 5 analyzes a more complex circuit, the recently proposed and highly cited antithetic biomolecular controller, using the host-aware model.
 Chapter 6 shows the design of nonlinear control strategies that allow controlling the concentration of biomass in a continuous bioreactor in a robust way.
 Chapter 7 summarizes and presents the main conclusions of the Thesis.
-Appendix 1 shows the theoretical development of the host-aware model.
+Appendix A shows the theoretical development of the host-aware model.
 
 This Thesis emphasizes the importance of studying cell burden in biological systems since these effects are very noticeable and generate interactions between seemingly unconnected circuits.
 The Thesis provides tools to model, simulate and design synthetic genetic circuits taking into account these burden effects and allowing the development of models that connect phenomena in synthetic genetic circuits, ranging from the intracelullar dynamics of gene expression to the macroscopic dynamics of the population of cells inside the bioreactor.
